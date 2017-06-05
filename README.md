@@ -1,2 +1,7 @@
-# ecs-nginx-reverse-proxy
-Reference architecture for deploying Nginx on ECS, both as a basic static resource server, and as a reverse proxy in front of a dynamic application server.
+# NGINX Reverse Proxy on Amazon EC2 Container Service
+
+[NGINX](https://www.nginx.com/resources/wiki/) is a high performance HTTP server and reverse proxy which has achieved significant adoption because of its asynchronous event driven architecture which allows it to serve thousands of concurrent requests with very low memory footprint.
+
+[Amazon EC2 Container Service](https://aws.amazon.com/ecs/) (ECS) is a highly scalable, high performance container management service that supports Docker containers and allows you to easily run applications on a managed cluster of Amazon EC2 instances.
+
+This reference architecture shows how to run NGINX containers on a fleet of instances using ECS. You can [deploy Nginx as a basic static HTTP file server](/static-host). Or you can [deploy an Nginx reverse proxy container in front of an application container](/reverse-proxy).
