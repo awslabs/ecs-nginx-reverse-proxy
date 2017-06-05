@@ -1,0 +1,20 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "nginx",
+      "image": "<your image URL here>",
+      "memory": "256",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": "8000",
+          "protocol": "tcp"
+        }
+      ]
+    }
+  ],
+  "volumes": [],
+  "networkMode": "bridge",
+  "placementConstraints": [],
+  "family": "nginx"
+}
