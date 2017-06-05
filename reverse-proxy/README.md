@@ -1,4 +1,4 @@
-## Nginx Reverse Proxy
+## NGINX Reverse Proxy on ECS
 
 __What is a reverse proxy?__ It is a server which fetches resources from another server on behalf of a client.
 
@@ -31,11 +31,11 @@ In addition to hacking tools scanning your servers you can also end up receiving
 
 It's the responsibility of anyone running a web server to handle and reject potentially malicious traffic or unwanted traffic, and ideally the web server is capable of rejecting this traffic as early as possible, before it actually reaches your core application code. A reverse proxy is one way to provide a layer of protection for your application server. It can be configured to reject these requests before they reach your application server.
 
-For example the following Nginx configuration will automatically reject all requests that have unrecognized methods, and will return 404 for any request that does not match the pattern `/api`:
+For example the following NGINX configuration will automatically reject all requests that have unrecognized methods, and will return 404 for any request that does not match the pattern `/api`:
 
 ```nginx
 http {
-  # Nginx will handle gzip compression of responses from the app server
+  # NGINX will handle gzip compression of responses from the app server
   gzip on;
   gzip_proxied any;
   gzip_types text/plain application/json;
@@ -44,7 +44,7 @@ http {
   server {
     listen 80;
 
-    # Nginx will reject anything not matching /api
+    # NGINX will reject anything not matching /api
     location /api {
       # Reject requests with unsupported HTTP method
       if ($request_method !~ ^(GET|POST|HEAD|OPTIONS|PUT|DELETE)$) {
@@ -68,12 +68,12 @@ http {
 
 This automatically rejects all of the unwanted traffic listed above before it reaches the application server, and instead the application server only receives traffic that was intended to reach the API that the application server is running.
 
-In addition to protecting the application server from unwanted traffic the above Nginx configuration also has Nginx handle `gzip` encoding responses for clients. This offloads that CPU intensive task from the application server, allowing the application
- to focus on running the business logic. The same thing can also be done to offload SSL termination on Nginx.
+In addition to protecting the application server from unwanted traffic the above NGINX configuration also has NGINX handle `gzip` encoding responses for clients. This offloads that CPU intensive task from the application server, allowing the application
+ to focus on running the business logic. The same thing can also be done to offload SSL termination on NGINX.
 
-This architecture reference shows how to deploy Nginx containers in front of your application containers on EC2 Container Service:
+This architecture reference shows how to deploy NGINX containers in front of your application containers on EC2 Container Service:
 
-![Nginx reverse proxy reference architecture](./images/nginx_reverse_proxy.png)
+![NGINX reverse proxy reference architecture](./images/nginx_reverse_proxy.png)
 
 __How to deploy it on your own account:__
 
@@ -104,7 +104,7 @@ __How to deploy it on your own account:__
       "containerDefinitions": [
         {
           "name": "nginx",
-          "image": "<your nginx reverse proxy image URL here>",
+          "image": "<your NGINX reverse proxy image URL here>",
           "memory": "256",
           "cpu": "256",
           "essential": true,
@@ -132,8 +132,8 @@ __How to deploy it on your own account:__
       "family": "application-stack"
     }
    ```
-   The above task definition will tells ECS to always launch the Nginx reverse proxy container, and the application container on the same instance, and to link them together. 
+   The above task definition will tells ECS to always launch the NGINX reverse proxy container, and the application container on the same instance, and to link them together. 
  
-    The application container does not have a publically accessible port, so there is no way for a vulnerability scanning tool to directly access the application. Instead all traffic will be sent to Nginx, and Nginx is configured to only forward traffic to your application container, only if it follows specific whitelisted rules.
+    The application container does not have a publically accessible port, so there is no way for a vulnerability scanning tool to directly access the application. Instead all traffic will be sent to NGINX, and NGINX is configured to only forward traffic to your application container, only if it follows specific whitelisted rules.
 
-7. The final step is to deploy the task as a service, behind [a load balancer which is configured to send traffic to the Nginx container](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-application-load-balancer.html).
+7. The final step is to deploy the task as a service, behind [a load balancer which is configured to send traffic to the NGINX container](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-application-load-balancer.html).
