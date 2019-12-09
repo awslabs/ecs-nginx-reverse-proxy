@@ -3,12 +3,12 @@
     {
       "name": "nginx",
       "image": "<your nginx reverse proxy image URL here>",
-      "memory": "256",
-      "cpu": "256",
+      "memory": 256,
+      "cpu": 256,
       "essential": true,
       "portMappings": [
         {
-          "containerPort": "80",
+          "containerPort": 80,
           "protocol": "tcp"
         }
       ],
@@ -19,8 +19,8 @@
     {
       "name": "app",
       "image": "<your app image URL here>",
-      "memory": "256",
-      "cpu": "256",
+      "memory": 256,
+      "cpu": 256,
       "essential": true
     }
   ],
