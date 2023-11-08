@@ -1,5 +1,7 @@
 ## NGINX Reverse Proxy on ECS
 
+__Note: There is an updated version of this reference available at: ["NGINX reverse proxy sidecar for a web container hosted with Amazon ECS and AWS Fargate"](https://containersonaws.com/pattern/nginx-reverse-proxy-sidecar-ecs-fargate-task)__
+
 __What is a reverse proxy?__ It is a server which fetches resources from another server on behalf of a client.
 
 __Why use a reverse proxy?__ One of the challenges of running a web server that serves resources to the public is that you can expect to receive quite a lot of unwanted traffic every day. Some of this traffic is relatively benign scans by researchers and tools such as [Shodan](https://www.shodan.io/) or [nmap](https://nmap.org/):
