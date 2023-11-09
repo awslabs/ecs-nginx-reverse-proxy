@@ -134,8 +134,8 @@ __How to deploy it on your own account:__
       "family": "application-stack"
     }
    ```
-   The above task definition will tells ECS to always launch the NGINX reverse proxy container, and the application container on the same instance, and to link them together. 
+   The above task definition will tell ECS to always launch the NGINX reverse proxy container, and the application container on the same instance, and to link them together. 
  
-    The application container does not have a publically accessible port, so there is no way for a vulnerability scanning tool to directly access the application. Instead all traffic will be sent to NGINX, and NGINX is configured to only forward traffic to your application container, only if it follows specific whitelisted rules.
+    The application container does not have a publicly accessible port, so there is no way for a vulnerability scanning tool to directly access the application. Instead all traffic will be sent to NGINX, and NGINX is configured to only forward traffic to your application container, only if it follows specific whitelisted rules.
 
 7. The final step is to deploy the task as a service, behind [a load balancer which is configured to send traffic to the NGINX container](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-application-load-balancer.html).
